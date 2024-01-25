@@ -1,27 +1,103 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  body {
+    @apply font-inter;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+
+@layer utilities {
+
+  /* HEADER */
+  .head-text {
+    @apply  sm:text-4xl text-6xl leading-[72px] font-bold tracking-[-1.2px] text-gray-900;
+  }
+
+  .head-sub-text {
+    @apply mt-2 sm:text-3xl text-5xl leading-[72px] font-semibold tracking-[-1.2px] text-gray-900;
+  }
+
+  /* NAVBAR */
+  .nav {
+    @apply flex justify-between items-center px-6 md:px-20 py-4;
+  }
+  .nav-words {
+    @apply font-spaceGrotesk text-[21px] font-bold;
+  }
+  
+  /* Home page PROJECT CARD */
+  .card-redirect-btn {
+    @apply mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+  }
+
+  /* Label for Forms */
+  .labelForm {
+    @apply inline-block text-sm font-medium text-gray-800 mt-2.5;
+  }
+
+  /* Input for Forms */
+  .inputForm {
+    @apply py-2 px-3 pe-11 w-full border border-gray-200 focus:border-white focus:ring-white shadow-sm rounded-lg text-sm;
+  }
+
+  /* Button for Forms */
+  .btnForm {
+    @apply py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-500 text-white
+  }
+
+  /* Drop down for login */
+  .dropDown {
+    @apply flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100;
+  }
+
+  .dropDownPanel {
+    @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end
+  }
+
+  /* Profile page */
+  .columnOverlay {
+    @apply flex flex-col gap-10 px-6 md:px-20 py-24;
+  }
+
+  /* Text */
+  .section-text {
+    @apply text-[32px] font-semibold;
+  }
+
+  .project_img-container {
+    @apply flex-1 relative flex flex-col gap-5 p-4 rounded-md;
+  }
+
+  /* Button */
+  .button-blue {
+    @apply w-full sm:w-auto whitespace-nowrap py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700
+  }
+
+  
+
+}
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding-left: 1px;
+  padding-right: 1px;
 }
