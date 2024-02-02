@@ -9,9 +9,7 @@ export const connectToDB = async () => {
     return console.log('No MONGODB_URI found in env!');
   }
 
-  if (isConnected) {
-    return console.log("Connected to MongoDB");
-  }
+  
 
   try {
     await mongoose.connect(process.env.MONGODB_URI);

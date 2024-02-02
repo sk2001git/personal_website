@@ -12,6 +12,7 @@
     "@auth/mongodb-adapter": "^2.0.14",
     "embla-carousel-autoplay": "^8.0.0-rc19",
     "embla-carousel-react": "^8.0.0-rc19",
+    "firebase": "^10.8.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.4",
     "next": "14.0.4",

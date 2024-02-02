@@ -11,13 +11,28 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageChange }) => {
 
   const handleFileSelect = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-
+  
     if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        alert("File is too large. Please select a file less than 2 MB.");
+        return;
+      }
+
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+
+      if (fileExtension !== 'jpeg' && fileExtension !== 'jpg' && fileExtension !== 'png') {
+        alert('Please select a valid image file (JPEG or PNG).');
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = function (e) {
-        setSelectedImage(e.target?.result as string);
+        const image = e.target?.result as string;
+
+        
+        setSelectedImage(image);
         setSelectedFile(file);
-        onImageChange(selectedImage, selectedFile);
+        onImageChange(image, file);
       };
       reader.readAsDataURL(file);
     }

@@ -5,15 +5,16 @@ import { SignOutButton } from "../auth/SignOutButton";
 import { DropdownItem } from "./DropdownItem";
 import { signOut, useSession } from "next-auth/react";
 
-
 const Dropdown: React.FC = ()  => {
-  const {data: session} = useSession();
-  const username = session?.user?.name;
+  const { data: session } = useSession();
+  const username = session?.user?.name ;
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
   const dropDownItems = [
     {
       name: "Profile",
-      onClick: () => {},
+      onClick: () => {
+      },
       href: "/profile"
     },
     {

@@ -1,14 +1,15 @@
 export type Project = {
+  _id: string;
   title: string;
-  summary: string;
-  description: string;
+  summary: string | "";
+  description: string | "";
   Image: string;
   ProjectCategory: string;
-  Team?: User[] | [];
+  Team: User[] | [];
 }
 
 export type User = {
-  id: string;
+  _id: string;
   email: string;
   username: string;
   image: string;

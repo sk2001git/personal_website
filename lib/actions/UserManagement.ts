@@ -1,9 +1,12 @@
+"use server";
+import { signOut as nextAuthSignOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { connectToDB } from "../mongoose";
 import { User as UserType } from "../../types";
 import mongoose from 'mongoose';
 import { Project } from '../../types';
 import UserModel from "../models/UserProject"; // Import the User model from Mongoose
+import { auth } from '@/auth';
 
 
 interface Props {
@@ -46,8 +49,9 @@ export async function User(userId: String): Promise<UserType | undefined> {
 
 }
 
-export async function getUserProjects(userId: String): Promise<Project[] | undefined> {
+export async function getUserProjects(userId: string): Promise<Project[] | undefined> {
   try {
+    connectToDB();
     const user = await UserModel.findById(userId).populate("projects"); // Use the findById method to retrieve the user by ID
     const projects = user?.projects || [];
     return projects;

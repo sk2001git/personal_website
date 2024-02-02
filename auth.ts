@@ -2,6 +2,9 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import NextAuth from "next-auth"
 import clientPromise from "./MongodbClient"
 import authConfig from "./auth.config"
+import { connectToDB } from "./lib/mongoose"
+import User from "./lib/models/UserProject"
+
 
 export const {
   handlers: { GET, POST },
@@ -15,12 +18,39 @@ export const {
       return token;
     },
     async session({session, token}) { 
-      //  We can use db fill operations by using if (session.user) session.user.customField = token.customField
+      await connectToDB();
+      const currentUser = await User.findOne({ email: session.user?.email });
 
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
+      if (token.sub && session.user && currentUser) {
+        session.user.id = currentUser._id.toString();
+        session.user.name = currentUser.username;
       }
       return session;
+    },
+    async signIn({ profile }): Promise<boolean> {
+      try {
+        await connectToDB();
+
+        // check if user exists
+        const userExists = await User.findOne({ email: profile?.email });
+        
+        // create new user if it does not exist
+        if (!userExists) {
+          const newUser = {
+
+            email: profile?.email,
+            username: profile?.name, 
+            image: profile?.picture,
+          };
+
+          await User.create(newUser);
+        }
+
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      } 
     },
   },
   adapter: MongoDBAdapter(clientPromise),
@@ -28,3 +58,6 @@ export const {
   ...authConfig, 
   
 })
+
+
+

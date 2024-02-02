@@ -9,6 +9,7 @@ import {useSession} from "next-auth/react";
 const Navbar = () => {
   const {data: session, status} = useSession();
 
+  
   return (
     <header className="w-full">
       <nav className="nav">

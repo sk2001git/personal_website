@@ -1,27 +1,5 @@
 import mongoose from "mongoose";
 
-const ProjectSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  summary: { type: String},
-  description: { type: String },
-  ImageAlt: { type: String, required: true, unique: true },
-  Image: { type: String, required: true },
-  ProjectCategory: { type: String },
-  Team: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-}, { 
-  timestamps: true,
-  default: {
-    Team: [],
-  }
-});
-
-const Project = mongoose.models.Project || mongoose.model("Project", ProjectSchema);
-
 const UserSchema = new mongoose.Schema({
   
   email: {
