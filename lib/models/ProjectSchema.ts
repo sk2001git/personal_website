@@ -9,7 +9,7 @@ const ProjectSchema = new mongoose.Schema({
   Team: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: "User",
     },
   ]// You need to put default straight away after
 }, { 
@@ -18,3 +18,4 @@ const ProjectSchema = new mongoose.Schema({
 
 const Project = mongoose.models.Project || mongoose.model("Project", ProjectSchema);
 export default Project;
+

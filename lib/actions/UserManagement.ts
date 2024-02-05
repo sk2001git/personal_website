@@ -1,22 +1,23 @@
 "use server";
-import { signOut as nextAuthSignOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { connectToDB } from "../mongoose";
-import { User as UserType } from "../../types";
 import mongoose from 'mongoose';
-import { Project } from '../../types';
 import UserModel from "../models/UserProject"; // Import the User model from Mongoose
-import { auth } from '@/auth';
+import ProjectModel from "../models/ProjectSchema"; // Import the Project model from Mongoose
+import { Project } from "../../types/project";
+import { User as UserType } from "../../types/user";
 
 
 interface Props {
   user: UserType;
 }
 
+const MAIN_ID= "65b340841578e7ca8036277a"
+
 export async function retrieveUserData() : Promise<UserType | undefined>  {
   try {
     const {data: session} = useSession();
-    connectToDB();
+    await connectToDB();
     const users = await mongoose.model('User').find({
       id : session?.user?.id
     });
@@ -33,7 +34,7 @@ export async function retrieveUserData() : Promise<UserType | undefined>  {
 
 export async function User(userId: String): Promise<UserType | undefined> {
   try {
-    connectToDB();
+    await connectToDB();
     const users = await mongoose.model('User').find({
       id : userId
     });
@@ -51,12 +52,58 @@ export async function User(userId: String): Promise<UserType | undefined> {
 
 export async function getUserProjects(userId: string): Promise<Project[] | undefined> {
   try {
-    connectToDB();
+    await connectToDB();
     const user = await UserModel.findById(userId).populate("projects"); // Use the findById method to retrieve the user by ID
-    const projects = user?.projects || [];
+    const projectsFromDB = user?.projects || [];
+
+    const projects: Project[] = projectsFromDB.map((projectFromDB: any) => {
+      const teamMembers: string[] = projectFromDB.Team.map((teamMember: any) => teamMember.toString());
+
+      return {
+        _id: projectFromDB._id.toString(),
+        title: projectFromDB.title,
+        summary: projectFromDB.summary,
+        description: projectFromDB.description,
+        Image: projectFromDB.Image,
+        ProjectCategory: projectFromDB.ProjectCategory,
+        Team: teamMembers,
+      };
+    });
+
+
     return projects;
   } catch (error) {
     console.log(error)
   }
+}
+
+export async function getMasterProjects(): Promise<Project[]> {
+  try {
+    await connectToDB();
+    
+    const triggerProjectModel = await ProjectModel.find({}); // Need this to initialise the model first 
+    const user = await UserModel.findById(MAIN_ID).populate("projects"); // Use the findById method to retrieve the user by ID
+    const projectsFromDB = user?.projects || [];
+
+    const projects: Project[] = projectsFromDB.map((projectFromDB: any) => {
+      const teamMembers: string[] = projectFromDB.Team.map((teamMember: any) => teamMember.toString());
+
+      return {
+        _id: projectFromDB._id.toString(),
+        title: projectFromDB.title,
+        summary: projectFromDB.summary,
+        description: projectFromDB.description,
+        Image: projectFromDB.Image,
+        ProjectCategory: projectFromDB.ProjectCategory,
+        Team: teamMembers,
+      };
+    });
+
+
+    return projects;
+  } catch (error) {
+    console.log(error)
+  }
+  return [];
 }
 

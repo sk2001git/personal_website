@@ -1,10 +1,11 @@
 import Carousel from '@/components/CarouselComponents/Carousel'
+import { getMasterProjects } from '@/lib/actions/UserManagement'
 import Image from 'next/image'
-import Link from 'next/link'
 
 
+const Home = async () => {
+  const projects = await getMasterProjects();
 
-export default function Home() {
   return (
     <>
       <div className="w-full grid justify-center">
@@ -29,9 +30,7 @@ export default function Home() {
           </div>
         </section>
         <section className="w-full px-6 md:px-20  flex">
-          
-        <Carousel/>
-        
+          <Carousel masterProjects={projects}/>
         </section>
       </div>
     </>
@@ -40,3 +39,4 @@ export default function Home() {
 
    )
 }
+export default Home

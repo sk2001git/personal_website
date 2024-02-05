@@ -5,8 +5,15 @@ import Autoplay from 'embla-carousel-autoplay'
 import Image from "next/image";
 import CarouselCard from "./CarouselCard";
 import Arrow from './Arrow';
+import { Project } from '@/types/project';
 
-const Carousel = () => {
+
+
+interface CarouselProps {
+  masterProjects: Project[];
+}
+
+const Carousel = ({ masterProjects } : CarouselProps) => {
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()]);
 
@@ -26,18 +33,15 @@ const Carousel = () => {
     <div className="inline-flex px-2"> 
       <Arrow onClick={scrollPrev} left={true} disabled={false} />  
       <div className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
-          <div className="embla__slide">
-            <CarouselCard />
+        <div className="embla__viewport" ref={emblaRef}>
+          <div className="embla__container">
+            {masterProjects?.map((project: Project) => (
+              <div className="embla__slide" key={project._id}>
+                <CarouselCard project={project} />
+              </div>
+            ))};  
           </div>
-          <div className="embla__slide">
-            <CarouselCard />
-          </div>
-
-          </div>
-        </div>
-      
+        </div>  
       </div>
       <Arrow onClick={scrollNext} left={false} disabled={false} />
     </div>
