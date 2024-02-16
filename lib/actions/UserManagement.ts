@@ -109,5 +109,5 @@ export async function getMasterProjects(): Promise<Project[]> {
     console.log(error)
   }
   return [];
-}
+} 
 
