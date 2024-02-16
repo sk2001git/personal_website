@@ -62,6 +62,8 @@ export async function getUserProjects(userId: string): Promise<Project[] | undef
       return {
         _id: projectFromDB._id.toString(),
         title: projectFromDB.title,
+        link: projectFromDB.link,
+        documentation: projectFromDB.documentation,
         summary: projectFromDB.summary,
         description: projectFromDB.description,
         Image: projectFromDB.Image,
@@ -92,6 +94,8 @@ export async function getMasterProjects(): Promise<Project[]> {
         _id: projectFromDB._id.toString(),
         title: projectFromDB.title,
         summary: projectFromDB.summary,
+        link: projectFromDB.link,
+        documentation: projectFromDB.documentation,
         description: projectFromDB.description,
         Image: projectFromDB.Image,
         ProjectCategory: projectFromDB.ProjectCategory,

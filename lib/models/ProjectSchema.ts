@@ -4,6 +4,8 @@ const ProjectSchema = new mongoose.Schema({
   title: { type: String, required: true },
   summary: { type: String, },
   description: { type: String },
+  link : { type: String },
+  documentation: { type: String },
   Image: { type: String, required: true, },
   ProjectCategory: { type: String },
   Team: [

@@ -14,7 +14,6 @@ const ProjectCard = ({ project} : Props ) => {
   const { toggleStatus, setToggleStatus } = useDeleteButtonContext();  // Use the context hook
 
 
-
   const handleDeleteClick = async () => {
     const project_id = project._id;
     await deleteProject(project_id);
@@ -53,8 +52,8 @@ const ProjectCard = ({ project} : Props ) => {
         <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 " href="#">
           View Project
         </a>
-        <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50" href="#">
-          View API
+        <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50" href={project.documentation} target="_blank">
+          Try out
         </a>
         
       </div>

@@ -17,6 +17,8 @@ export type CreateProject = {
   title: string;
   summary: string;
   description: string;
+  link: string;
+  documentation: string;
   Image: string;
   ProjectCategory: string;
 }
@@ -28,6 +30,8 @@ const Form: React.FC<FormProps> = ({ userId }) => {
   const [summary, setSummary] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
+  const [link, setLink] = useState('');
+  const [documentation, setDocumentation] = useState('');
 
   const [parentSelectedImage, setParentSelectedImage] = useState<string>("");
   const [parentSelectedFile, setParentSelectedFile] = useState<File | null>(null);
@@ -55,6 +59,10 @@ const Form: React.FC<FormProps> = ({ userId }) => {
       alert('Please select a category');
       return;
     }
+    if (!link || !documentation) {
+      alert('Please enter a link and documentation link, if they are the same, please enter the same link');
+      return;
+    }
     const file = parentSelectedFile;
     const storageRef = ref(storage, `projectImages/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -67,6 +75,8 @@ const Form: React.FC<FormProps> = ({ userId }) => {
       summary: summary,
       description: description,
       Image: downloadURL,
+      link: link,
+      documentation: documentation,
       ProjectCategory: category,
     } 
     await createProject({project, userId});
@@ -132,6 +142,32 @@ const Form: React.FC<FormProps> = ({ userId }) => {
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
+            
+            {/* Project link field */}
+            <div className="space-y-2">
+              <label htmlFor="link" className="labelForm">
+                Project Set-up Link
+              </label>
+              <input
+                id="link"
+                type="text"
+                className="inputForm"
+                placeholder="Enter project link"
+                onChange={(e) => setLink(e.target.value)}
+              />
+              <label htmlFor="link" className="labelForm">
+                Documentation Link
+              </label>
+              <input
+                id="link"
+                type="text"
+                className="inputForm"
+                placeholder="Enter documentation link"
+                onChange={(e) => setDocumentation(e.target.value)}
+              />
+            </div>
+
+        
 
 
 

@@ -4,6 +4,7 @@ import { CreateProject } from '@/components/Form';
 import Project from '../models/ProjectSchema';
 import User from '../models/UserProject';
 import { revalidatePath } from 'next/cache';
+import { link } from 'fs';
 
 
 interface Props {
@@ -26,6 +27,8 @@ export async function createProject({project, userId}: PropsWithUser): Promise<v
     const newProject = {
       title: project.title,
       summary: project.summary,
+      link: project.link,
+      documentation: project.documentation,
       description: project.description,
       Image: project.Image,
       ProjectCategory: project.ProjectCategory,
