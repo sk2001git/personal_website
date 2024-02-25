@@ -20,7 +20,7 @@ export const {
     async session({session, token}) { 
       await connectToDB();
       const currentUser = await User.findOne({ email: session.user?.email });
-
+      
       if (token.sub && session.user && currentUser) {
         session.user.id = currentUser._id.toString();
         session.user.name = currentUser.username;
@@ -54,7 +54,7 @@ export const {
     },
   },
   adapter: MongoDBAdapter(clientPromise),
-  session: { strategy: "jwt"},
+  session: { strategy: "jwt", maxAge: 8 * 60 * 60},
   ...authConfig, 
   
 })

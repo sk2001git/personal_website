@@ -4,7 +4,7 @@ import { CreateProject } from '@/components/Form';
 import Project from '../models/ProjectSchema';
 import User from '../models/UserProject';
 import { revalidatePath } from 'next/cache';
-import { link } from 'fs';
+import {Project as ProjectType} from '@/types/project';
 
 
 interface Props {
@@ -58,4 +58,20 @@ export async function deleteProject( id : string): Promise<void> {
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function getProject(id: string): Promise<ProjectType> {
+  try {
+    await connectToDB();
+    const project = await Project.findById(id);
+    if (!project) {
+      // Handle case where the project with the given id was not found
+      console.log('Project not found');
+      return;
+    }
+    return project;
+  } catch (error) {
+    console.log(error);
+  }
+  return {} as ProjectType;
 }

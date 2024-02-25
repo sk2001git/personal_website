@@ -50,7 +50,7 @@ export async function User(userId: String): Promise<UserType | undefined> {
 
 }
 
-export async function getUserProjects(userId: string): Promise<Project[] | undefined> {
+export async function getUserProjects(userId: string): Promise<Project[]> {
   try {
     await connectToDB();
     const user = await UserModel.findById(userId).populate("projects"); // Use the findById method to retrieve the user by ID
@@ -77,6 +77,7 @@ export async function getUserProjects(userId: string): Promise<Project[] | undef
   } catch (error) {
     console.log(error)
   }
+  return [];
 }
 
 export async function getMasterProjects(): Promise<Project[]> {
@@ -111,3 +112,16 @@ export async function getMasterProjects(): Promise<Project[]> {
   return [];
 } 
 
+export async function getTeamMembers(teammates: String[]): Promise<UserType[]> {
+  try {
+    await connectToDB();
+    const teamMembers: UserType[] = await UserModel.find({
+      _id: { $in: teammates }
+    });
+    return teamMembers;
+
+  } catch (error) {
+    console.log(error);
+  }
+  return [];
+}

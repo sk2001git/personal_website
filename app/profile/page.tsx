@@ -1,6 +1,4 @@
 import { getUserProjects} from '@/lib/actions/UserManagement';
-import { Project } from '@/types/project';
-import ProjectCard from '@/components/profile/ProjectCard';
 import { auth } from '@/auth';
 import { DeleteButtonWrapper } from '@/context/DeleteButtonContext';
 import ProfilePage from '@/components/profile/ProfilePage';

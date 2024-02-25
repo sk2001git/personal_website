@@ -32,11 +32,11 @@ const CarouselCard = ( {project} : CarouselCardProps) => {
       </p>
     </div>
     <div className="mt-auto flex border-t border-grey divide-x divide-grey">
-      <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 " href="#">
+      <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 " href={`/projects/${project._id}`}>
         View Project
       </a>
-      <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50" href="#">
-        View API
+      <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50" href={project.link}>
+        Try out
       </a>
     </div>
   </div>

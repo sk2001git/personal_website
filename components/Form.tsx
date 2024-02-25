@@ -6,7 +6,6 @@ import { createProject } from "@/lib/actions/ProjectManagement";
 import { useRouter } from "next/navigation";
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/firebaseConfig';
-import { get } from "http";
 
 
 interface FormProps {
@@ -32,6 +31,7 @@ const Form: React.FC<FormProps> = ({ userId }) => {
   const [category, setCategory] = useState('');
   const [link, setLink] = useState('');
   const [documentation, setDocumentation] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [parentSelectedImage, setParentSelectedImage] = useState<string>("");
   const [parentSelectedFile, setParentSelectedFile] = useState<File | null>(null);
@@ -45,6 +45,7 @@ const Form: React.FC<FormProps> = ({ userId }) => {
 
   
   const handleSubmit = async () => {
+    setIsSubmitting(true);
     if (!projectName) {
       alert ('Please enter a project name');
       return;
@@ -63,6 +64,8 @@ const Form: React.FC<FormProps> = ({ userId }) => {
       alert('Please enter a link and documentation link, if they are the same, please enter the same link');
       return;
     }
+
+
     const file = parentSelectedFile;
     const storageRef = ref(storage, `projectImages/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -202,8 +205,9 @@ const Form: React.FC<FormProps> = ({ userId }) => {
               type="button"
               className="btnForm hover:bg-blue-600 disabled:opacity-50 disabled:pointer-events-none"
               onClick={handleSubmit}
+              disabled={isSubmitting}
             >
-              Submit your project
+              {isSubmitting ? 'Submitting...' : 'Submit your project'}
             </button>
           </div>
 

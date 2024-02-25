@@ -86,7 +86,7 @@
   }
 
   .dialog-container {
-    @apply fixed inset-0 z-10 overflow-y-auto bg-black bg-opacity-60;
+    @apply fixed inset-0 z-auto overflow-y-auto bg-white bg-opacity-60;
   }
 
   .dialog-content {

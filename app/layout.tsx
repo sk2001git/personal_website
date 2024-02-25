@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
       <html lang="en" className="h-full">
-        <body className={`${inter.className} flex flex-col h-full overflow-y-auto`}>
+        <body className={`${inter.className} flex flex-col h-full`}>
           <SessionProvider session={session}>
             <main className="w-full">
               <Navbar />

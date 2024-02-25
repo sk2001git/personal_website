@@ -53,7 +53,7 @@ const Modal = ({ productId }: Props) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0" />
+              <Dialog.Overlay className="fixed inset-0 " />
             </Transition.Child>
 
             <span
@@ -73,16 +73,15 @@ const Modal = ({ productId }: Props) => {
               <div className="dialog-content">
                 <div className="flex flex-col">
                   <div className="flex justify-end">
-                    <div className="p-3 border border-gray-200 rounded-10">
+                    <a className="p-3 border border-gray-200 rounded-10 " onClick={closeModal}>
                       <Image
                         src={"/assets/icons/x-close.svg"}
                         alt="close"
                         width={12}
                         height={12}
                         className="cursor-pointer"
-                        onClick={closeModal}
                       />
-                    </div>
+                    </a>
                   </div>
 
                   <p className="pt-4 flex justify-center font-bold text-2xl">
