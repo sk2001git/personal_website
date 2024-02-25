@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { SignOutButton } from "../auth/SignOutButton";
 import { DropdownItem } from "./DropdownItem";
 import { signOut, useSession } from "next-auth/react";
 
@@ -19,8 +18,10 @@ const Dropdown: React.FC = ()  => {
     },
     {
       name: "Sign Out",
-      onClick: () => { signOut();},
-      href: "/"
+      onClick: async () => { try{await signOut() } catch (error ) {
+        console.log(error);
+      };},
+      href: "/api/auth/signout"
     }
   ];
 

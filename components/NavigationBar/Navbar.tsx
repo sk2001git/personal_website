@@ -2,7 +2,6 @@
 import Image from "next/image"
 import { LoginButton } from "../auth/LoginButton"
 import Dropdown from "./Dropdown"
-import {useState } from "react";
 import {useSession} from "next-auth/react";
 
 

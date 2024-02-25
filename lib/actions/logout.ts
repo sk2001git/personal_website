@@ -3,5 +3,10 @@
 import { signOut } from "next-auth/react";
 
 export const logout = async () => {
-  await signOut();
-};
+  try {
+    
+    await signOut();
+  } catch (error) {
+    console.log(error);
+  };
+}

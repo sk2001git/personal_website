@@ -1,14 +1,13 @@
 "use client";
 import { logout } from "@/lib/actions/logout";
-import { useSession } from "next-auth/react";
-
+import { useRouter } from "next/navigation";
 
 
 export const SignOutButton: React.FC = () => {
-  const session =  useSession();
   const onClick = () => {
-    logout();
-    session.update(); 
+    const router = useRouter();
+
+    router.push('/api/auth/signout');
   }
 
   return (<span onClick={onClick} className="cursor-pointer nav-words">
