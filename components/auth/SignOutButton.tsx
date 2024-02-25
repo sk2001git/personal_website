@@ -1,8 +1,8 @@
 import { signOut } from "next-auth/react";
 
 export const SignOutButton: React.FC = () => {
-  const onClick = () => {
-    signOut();
+  const onClick = async () => {
+    await signOut();
   }
   return (<span onClick={onClick} className="cursor-pointer nav-words">
     Sign Out
