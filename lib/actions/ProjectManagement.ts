@@ -67,7 +67,8 @@ export async function getProject(id: string): Promise<ProjectType> {
     if (!project) {
       // Handle case where the project with the given id was not found
       console.log('Project not found');
-      return;
+      throw new Error('Project not found');
+      
     }
     return project;
   } catch (error) {
