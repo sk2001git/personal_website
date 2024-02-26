@@ -49,7 +49,13 @@ const ProjectCard = ({ project} : Props ) => {
         
       </div>
       : 
+      <div className="mt-auto flex border-t border-grey divide-x divide-grey">
+        <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 " href={`/edit/${project._id}`}>
+          Edit
+        </a>
         <Modal productId={project._id} />
+      </div>
+        
       }
     </div>
   )

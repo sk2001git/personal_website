@@ -4,7 +4,6 @@ import { FormEvent, Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { deleteProject } from '@/lib/actions/ProjectManagement';
-import { useDeleteButtonContext } from '@/context/DeleteButtonContext';
 
 interface Props {
   productId: string;
@@ -36,7 +35,7 @@ const Modal = ({ productId }: Props) => {
     <>
       <button
         type="button"
-        className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-red-400 text-gray-800 shadow-sm hover:bg-gray-50 rounded-b-xl border border-red-600 mt-auto"
+        className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-red-400 text-gray-800 shadow-sm hover:bg-gray-50 rounded-br-xl border border-red-600 mt-auto"
         onClick={openModal}
       >
         Delete

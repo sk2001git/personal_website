@@ -125,3 +125,27 @@ export async function getTeamMembers(teammates: String[]): Promise<UserType[]> {
   }
   return [];
 }
+
+export async function getUsers(): Promise<UserType[]> {
+  try {
+    await connectToDB();
+    const users: UserType[] = await UserModel.find({});
+    return users;
+  } catch (error) {
+    console.log(error);
+  }
+  return [];
+}
+
+export async function getUsersFromProject(projectId: String): Promise<UserType[]> {
+  try {
+    await connectToDB();
+    const project = await ProjectModel.findById(projectId).populate("Team");
+    const teamMembers: UserType[] = project?.Team || [];
+    return teamMembers;
+  } catch (error) {
+    console.log(error);
+  }
+  return [];
+}
+

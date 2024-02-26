@@ -1,5 +1,5 @@
 import { auth } from '@/auth';
-import Form from '@/components/Form';
+import Form from '@/components/profile/Form';
 
 
 
