@@ -9,8 +9,6 @@ import { storage } from '@/firebaseConfig';
 import { Project } from "@/types/project";
 import UserSearch from "./UserSearch";
 import { User } from "@/types/user";
-import { getUsers, getUsersFromProject } from "@/lib/actions/UserManagement";
-import { set } from "mongoose";
 
 interface EditFormProps {
   project: string;

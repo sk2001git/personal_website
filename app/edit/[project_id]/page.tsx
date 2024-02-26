@@ -1,3 +1,4 @@
+import EditForm from "@/components/profile/EditForm";
 import { getProject } from "@/lib/actions/ProjectManagement";
 import { getUsers, getUsersFromProject } from "@/lib/actions/UserManagement";
 import { Project } from "@/types/project";
@@ -15,10 +16,13 @@ export default async function editProject({params}: Props) {
     return (<div>Project not found</div>);
   }
 
+  const projectString = JSON.stringify(project);
+  const teamMembersString = JSON.stringify(teamMembers);
+  const allUsersString = JSON.stringify(allUsers);
 
   
   return (
-    <div> a </div>
+    <EditForm project={projectString} members={teamMembersString} allusers={allUsersString} />
   );
 
 }

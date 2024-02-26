@@ -5,6 +5,7 @@ import Project from '../models/ProjectSchema';
 import User from '../models/UserProject';
 import { revalidatePath } from 'next/cache';
 import {Project as ProjectType} from '@/types/project';
+import { EditProject } from '@/components/profile/EditForm';
 
 
 interface Props {
@@ -75,4 +76,20 @@ export async function getProject(id: string): Promise<ProjectType> {
     console.log(error);
   }
   return {} as ProjectType;
+}
+
+export async function updateProject(project_details: EditProject, project_id: string ) {
+  try {
+    await connectToDB();
+    const updatedProject = await Project.findByIdAndUpdate(project_id, project_details);
+    if (!updatedProject) {
+      // Handle case where the project with the given id was not found
+      console.log('Project not found');
+      throw new Error('Project not found');
+    }
+
+    return updatedProject;
+  } catch (error) {
+    console.log(error);
+  }
 }

@@ -71,7 +71,7 @@ const Content = ({project, users}: Props) => {
              
               <div className="text-center">
                 <figure className="relative w-full h-60">
-                  <img className="w-full h-full absolute top-0 start-0 object-cover rounded-xl" src={project.Image} alt={`${project.title}/photo`}/>
+                  <img className="w-full h-full absolute top-0 start-0 object-contain rounded-xl" src={project.Image} alt={`${project.title}/photo`}/>
                 </figure>
 
                 <span className="mt-3 mb-8 block text-sm text-center text-gray-500">
