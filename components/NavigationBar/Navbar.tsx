@@ -24,13 +24,11 @@ const Navbar = () => {
             </a>
           </div>
           <div className="flex justify-between gap-x-5">
-            <a className="nav-words" href="/about">
-              About Me 
-            </a>
-            <a className="nav-words" href="/portfolio">
+            
+            <a className="nav-words m-2" href={`/profile/${process.env.MAIN_ID}`}>
               Portfolio
             </a>
-            <div className="sm:flex ">
+            <div className="sm:flex m-2">
 
               {status === "authenticated" ? <Dropdown/> : <LoginButton/>}
 

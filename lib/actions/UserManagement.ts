@@ -12,7 +12,6 @@ interface Props {
   user: UserType;
 }
 
-const MAIN_ID= "65b340841578e7ca8036277a"
 
 export async function retrieveUserData() : Promise<UserType | undefined>  {
   try {
@@ -85,7 +84,7 @@ export async function getMasterProjects(): Promise<Project[]> {
     await connectToDB();
     
     const triggerProjectModel = await ProjectModel.find({}); // Need this to initialise the model first 
-    const user = await UserModel.findById(MAIN_ID).populate("projects"); // Use the findById method to retrieve the user by ID
+    const user = await UserModel.findById(process.env.MAIN_ID).populate("projects"); // Use the findById method to retrieve the user by ID
     const projectsFromDB = user?.projects || [];
 
     const projects: Project[] = projectsFromDB.map((projectFromDB: any) => {
