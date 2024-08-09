@@ -6,6 +6,9 @@ import { createProject } from "@/lib/actions/ProjectManagement";
 import { useRouter } from "next/navigation";
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/firebaseConfig';
+import IconSearch from "@/components/IconSearch";
+import { Icon } from "@iconify/react/dist/iconify.js";
+
 
 
 interface FormProps {
@@ -30,6 +33,8 @@ const Form: React.FC<FormProps> = ({ userId }) => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [link, setLink] = useState('');
+  const [selectedIcons, setSelectedIcons] = useState<string[]>(['']);
+
   const [documentation, setDocumentation] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -43,6 +48,11 @@ const Form: React.FC<FormProps> = ({ userId }) => {
     setParentSelectedFile(file);
   };
 
+  const handleIconSelect = (iconNames: string[]) => {
+    setSelectedIcons(iconNames);
+  };
+
+
   
   const handleSubmit = async () => {
     setIsSubmitting(true);
@@ -55,7 +65,7 @@ const Form: React.FC<FormProps> = ({ userId }) => {
       return;
     } 
     
-    if (!category || category === 'Select a category') {
+    if (!category) {
       // Category not selected, show an error message or handle it accordingly
       alert('Please select a category');
       return;
@@ -168,6 +178,14 @@ const Form: React.FC<FormProps> = ({ userId }) => {
                 placeholder="Enter documentation link"
                 onChange={(e) => setDocumentation(e.target.value)}
               />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="icon" className="labelForm">
+                Project Icon
+              </label>
+              <IconSearch onSelectIcons={handleIconSelect} />
+             
             </div>
 
         

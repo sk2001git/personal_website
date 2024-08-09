@@ -11,6 +11,7 @@
   "dependencies": {
     "@auth/mongodb-adapter": "^2.0.14",
     "@headlessui/react": "^1.7.18",
+    "axios": "^1.7.3",
     "embla-carousel-autoplay": "^8.0.0-rc19",
     "embla-carousel-react": "^8.0.0-rc19",
     "firebase": "^10.8.0",
@@ -23,6 +24,8 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@iconify-json/devicon": "^1.1.50",
+    "@iconify/react": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
