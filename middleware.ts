@@ -6,15 +6,19 @@ import NextAuth from "next-auth";
 // This allows redirect to login page if not logged in, or redirect to profile page if logged in.
 
 const { auth } = NextAuth(authConfig);
+const publicProfilePattern = /^\/profile\/[a-zA-Z0-9]+$/;
+
 
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
+
   // Redirect to login if not logged in
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname); 
   const isAuthRoute = authRoute.includes(nextUrl.pathname);
+  const isPublicProfile = publicProfilePattern.test(nextUrl.pathname);
 
   if (isApiAuthRoute) { // Allow every auth route to be invoked
     return null;
@@ -27,7 +31,7 @@ export default auth((req) => {
     return null;
   }
 
-  if (!isLoggedIn && !isPublicRoute) {
+  if (!isLoggedIn && !isPublicRoute && !isPublicProfile) {
     return Response.redirect(new URL("/auth/login", nextUrl)); 
   }
 
