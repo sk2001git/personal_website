@@ -31,14 +31,16 @@ const Home = async () => {
             
           </div>
         </section>
-        <section className="w-full px-6 md:px-20  flex">
-          <Carousel masterProjects={projects}/>
-        </section>
-        <section className="w-full flex grid grid-cols-1">
-          {projects.map((project) => (
-            <MainPageCard key={project._id} project={project} />
-          ))}
-        </section>
+        <section className="w-full grid grid-cols-1 ">
+          <section className="w-full px-6 md:px-20  flex">
+            <Carousel masterProjects={projects}/>
+          </section>
+          <section className="w-full grid grid-cols-1 ">
+            {projects.map((project) => (
+              <MainPageCard key={project._id} project={project} />
+            ))}
+          </section>
+      </section>
       </div>
     </>
     
