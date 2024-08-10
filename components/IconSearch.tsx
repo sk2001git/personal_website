@@ -4,13 +4,14 @@ import axios from 'axios';
 
 interface IconSearchProps {
   onSelectIcons: (iconNames: string[]) => void;
+  currentIcons?: string[];
 }
 
-const IconSearch: React.FC<IconSearchProps> = ({ onSelectIcons }) => {
+const IconSearch: React.FC<IconSearchProps> = ({ onSelectIcons, currentIcons }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<string[]>([]);
   const [devicons, setDevicons] = useState<string[]>([]);
-  const [selectedIcons, setSelectedIcons] = useState<string[]>([]);
+  const [selectedIcons, setSelectedIcons] = useState<string[]>(currentIcons || []);
 
   const iconifyApi = axios.create({
     baseURL: 'https://api.iconify.design',
@@ -44,7 +45,7 @@ const IconSearch: React.FC<IconSearchProps> = ({ onSelectIcons }) => {
 
   const handleAddIcon = (iconName: string) => {
     if (!selectedIcons.includes(iconName)) {
-      if (selectedIcons.length >= 8) {
+      if (selectedIcons.length > 12) {
         alert('You can only select up to 8 icons');
         return;
       }

@@ -2,7 +2,7 @@ import Content from "@/components/project-display-page/content"
 import { getProject } from "@/lib/actions/ProjectManagement"
 import { getTeamMembers } from "@/lib/actions/UserManagement"
 import { Project } from "@/types/project"
-import { get } from "http"
+
 
 
 type Props = {
@@ -27,7 +27,8 @@ const ProjectDetails = async ({params}: Props) => {
     description: project.description,
     Image: project.Image,
     ProjectCategory: project.ProjectCategory,
-    Team: project.Team.map((id) => id.toString())
+    Team: project.Team.map((id) => id.toString()),
+    Icons: project.Icons
   };
 
   const plainUsers = teamMembers.map((user) => {

@@ -13,7 +13,10 @@ const ProjectSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-  ]// You need to put default straight away after
+  ],
+   // You need to put default straight away after
+   Icons: { type: [String], default: [] },
+
 }, { 
   timestamps: true,
 });

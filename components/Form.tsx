@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/firebaseConfig';
 import IconSearch from "@/components/IconSearch";
-import { Icon } from "@iconify/react/dist/iconify.js";
 
 
 
@@ -23,6 +22,7 @@ export type CreateProject = {
   documentation: string;
   Image: string;
   ProjectCategory: string;
+  Icons: string[];
 }
 
 
@@ -83,6 +83,7 @@ const Form: React.FC<FormProps> = ({ userId }) => {
     const downloadURL = await getDownloadURL(snapshot.ref);
     setDownloadURL(downloadURL);
 
+    const icons = selectedIcons || [];
     const project: CreateProject = {
       title: projectName,
       summary: summary,
@@ -91,6 +92,7 @@ const Form: React.FC<FormProps> = ({ userId }) => {
       link: link,
       documentation: documentation,
       ProjectCategory: category,
+      Icons: icons
     } 
     await createProject({project, userId});
     router.push('/profile');

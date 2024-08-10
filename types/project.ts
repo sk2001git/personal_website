@@ -12,4 +12,5 @@ export interface Project {
   Image: string;
   ProjectCategory?: string;
   Team: string[];
+  Icons: string[];
 }

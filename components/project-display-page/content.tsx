@@ -14,6 +14,7 @@ interface PlainProject {
   Image: string;
   ProjectCategory?: string;
   Team: string[];
+  Icons: string[];
 }
 
 interface plainUsers {
@@ -26,20 +27,13 @@ type Props = {
   users: plainUsers[];
 };
 
-function capitalizeFirstLetter(string: string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+function formatWord(string: string) {
+  const filter_wordmark = string.split('-')[0];
+  return filter_wordmark.charAt(0).toUpperCase() + filter_wordmark.slice(1);
 }
 
 const Content = ({project, users}: Props) => {
-  const iconNames: string[] = [
-    "devicon:pypi",
-    "devicon:react",
-    "devicon:docker",
-    "devicon:python",
-    "devicon:typescript",
-    "devicon:javascript",
-    "devicon:html5",
-  ];
+ 
 
   return (
     <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
@@ -94,13 +88,11 @@ const Content = ({project, users}: Props) => {
 
               <a className="text-lg text-gray-800 whitespace-pre-line"> {project.description} </a>
 
-              <div className="grid grid-cols-5 sm:grid-cols-5 gap-1 p-1 rounded-lg bg-slate-100">
-                  {iconNames.map((iconName) => (
+              <div className="grid grid-cols-6 sm:grid-cols-6 gap-1 p-1 rounded-lg bg-gray-200">
+                  {project.Icons?.map((iconName) => (
                      <div key={iconName} className="flex flex-col items-center justify-center text-center">
                      <Icon icon={iconName} width="75%" height="auto" />
-                     <a className="mt-2 font-sans font-bold text-gray-500 italic">
-                     {capitalizeFirstLetter(iconName.split(':')[1])}
-                     </a>
+                     
                    </div>
                 ))}
               </div>

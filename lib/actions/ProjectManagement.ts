@@ -33,6 +33,7 @@ export async function createProject({project, userId}: PropsWithUser): Promise<v
       description: project.description,
       Image: project.Image,
       ProjectCategory: project.ProjectCategory,
+      Icons: project.Icons,
     };
     const createdProject = await Project.create(newProject);
     await Project.findByIdAndUpdate(createdProject._id, { $push: { Team: userId } });

@@ -9,6 +9,7 @@ import { storage } from '@/firebaseConfig';
 import { Project } from "@/types/project";
 import UserSearch from "./UserSearch";
 import { User } from "@/types/user";
+import IconSearch from "../IconSearch";
 
 interface EditFormProps {
   project: string;
@@ -25,6 +26,7 @@ export type EditProject = {
   Image: string;
   ProjectCategory: string;
   team: string[];
+  Icons: string[];
 }
 
 
@@ -44,6 +46,7 @@ const EditForm: React.FC<EditFormProps> = ({project, members, allusers}: EditFor
   const [link, setLink] = useState(currentProject.link);
   const [documentation, setDocumentation] = useState(currentProject.documentation);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedIcons, setSelectedIcons] = useState<string[]>(currentProject.Icons);
 
   // Users State 
   const [selectedUsers, setSelectedUsers] = useState<User[]>(currentMembers);
@@ -54,7 +57,9 @@ const EditForm: React.FC<EditFormProps> = ({project, members, allusers}: EditFor
   const [parentSelectedFile, setParentSelectedFile] = useState<File | null>(null);
 
 
-  
+  const handleIconSelect = (iconNames: string[]) => {
+    setSelectedIcons(iconNames);
+  };
 
   const handleImageChange = (image: string, file: File | null) => {
     setParentSelectedImage(image);
@@ -102,6 +107,7 @@ const EditForm: React.FC<EditFormProps> = ({project, members, allusers}: EditFor
       documentation: documentation,
       ProjectCategory: category,
       team: selectedUsers.map((user) => user._id),
+      Icons: selectedIcons || [],
     };
 
     await updateProject(updatedProject, currentProject._id);
@@ -136,12 +142,14 @@ const EditForm: React.FC<EditFormProps> = ({project, members, allusers}: EditFor
                 onChange={(e) => setProjectName(e.target.value)}
               />
             </div>
+            <div className="flex justify-center items-center">
 
-            <div className="space-y-2">
-              <img className="mx-auto object-contain rounded-xl" src={currentProject.Image} alt={`${currentProject.title}/photo`}/>
-              <p className="text-gray text-center"> The current photo </p>
+              <div className="space-y-2" style={{ maxWidth: '50%', maxHeight: '25%' }}>
+                <img className="mx-auto object-fill rounded-xl" src={currentProject.Image} alt={`${currentProject.title}/photo`}/>
+                <p className="text-gray-500 text-center"> The current photo </p>
 
-              <ImageUploader onImageChange={handleImageChange}  />
+                <ImageUploader onImageChange={handleImageChange}  />
+              </div>
             </div>
 
             <div className="space-y-2">
@@ -217,6 +225,14 @@ const EditForm: React.FC<EditFormProps> = ({project, members, allusers}: EditFor
             </div>
 
           </div>
+          <div className="space-y-2">
+              <label htmlFor="icon" className="labelForm">
+                Project Icon
+              </label>
+              <IconSearch onSelectIcons={handleIconSelect} currentIcons={selectedIcons} />
+             
+          </div>
+
           <div className="space-y-5 mt-5">
             <UserSearch
               onUserSelect={handleUserSelect}
