@@ -1,5 +1,6 @@
 import GrindTogether from '@/components/card';
 import Carousel from '@/components/CarouselComponents/Carousel'
+import MainPageCard from '@/components/ProjectMainCard';
 import { getMasterProjects } from '@/lib/actions/UserManagement'
 import Image from 'next/image'
 
@@ -32,6 +33,11 @@ const Home = async () => {
         </section>
         <section className="w-full px-6 md:px-20  flex">
           <Carousel masterProjects={projects}/>
+        </section>
+        <section className="w-full flex grid grid-cols-1">
+          {projects.map((project) => (
+            <MainPageCard key={project._id} project={project} />
+          ))}
         </section>
       </div>
     </>

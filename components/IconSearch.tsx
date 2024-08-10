@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
-import axios from 'axios';
+import deviconsData from '@/data/devicons.json'; // Adjust the path if necessary
 
 interface IconSearchProps {
   onSelectIcons: (iconNames: string[]) => void;
@@ -13,37 +13,24 @@ const IconSearch: React.FC<IconSearchProps> = ({ onSelectIcons, currentIcons }) 
   const [devicons, setDevicons] = useState<string[]>([]);
   const [selectedIcons, setSelectedIcons] = useState<string[]>(currentIcons || []);
 
-  const iconifyApi = axios.create({
-    baseURL: 'https://api.iconify.design',
-  });
-
+  
   useEffect(() => {
-    iconifyApi.get('/collection?prefix=devicon')
-      .then(response => {
-        const deviconsList = response.data.icons;
-        setDevicons(deviconsList);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    const uncategorizedIcons = deviconsData.uncategorized; // Take note the json doesnt come with the devicons: prefix needed
+    setDevicons(uncategorizedIcons);
+
   }, []);
 
   useEffect(() => {
     if (searchTerm) {
-      iconifyApi.get(`/search?query=${searchTerm}&collection=devicon`)
-        .then(response => {
-          const searchResults = response.data.icons;
-          setSearchResults(searchResults.slice(0, 10)); // Limit to 10 results for performance
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      const filteredIcons = devicons.filter(icon => icon.includes(searchTerm.toLowerCase()));
+      setSearchResults(filteredIcons.slice(0, 10)); 
     } else {
       setSearchResults([]);
     }
   }, [searchTerm]);
 
   const handleAddIcon = (iconName: string) => {
+    // The icon name should include the "devicon:"" prefix
     if (!selectedIcons.includes(iconName)) {
       if (selectedIcons.length > 12) {
         alert('You can only select up to 8 icons');
@@ -57,6 +44,7 @@ const IconSearch: React.FC<IconSearchProps> = ({ onSelectIcons, currentIcons }) 
   };
 
   const handleRemoveIcon = (iconName: string) => {
+    // The icon name should include the "devicon: "" prefix by default, no need to modify
     const updatedSelectedIcons = selectedIcons.filter(icon => icon !== iconName);
     setSelectedIcons(updatedSelectedIcons);
     onSelectIcons(updatedSelectedIcons);
@@ -75,10 +63,10 @@ const IconSearch: React.FC<IconSearchProps> = ({ onSelectIcons, currentIcons }) 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {searchResults.map((iconName) => (
           <div key={iconName} className="flex flex-col items-center justify-between h-32"> {/* Set height here */}
-            <Icon icon={iconName} width="48" height="48" />
-            <span className="mt-2 text-sm text-gray-700">{iconName.split(':')[1]}</span>
+            <Icon icon={"devicon:" + iconName} width="48" height="48" />
+            <span className="mt-2 text-sm text-gray-700">{iconName}</span>
             <div
-              onClick={() => handleAddIcon(iconName)}
+              onClick={() => handleAddIcon("devicon:" + iconName)} 
               className="mt-2 p-2 bg-blue-500 text-white rounded"
             >
               Add
@@ -92,13 +80,13 @@ const IconSearch: React.FC<IconSearchProps> = ({ onSelectIcons, currentIcons }) 
           {selectedIcons.map((iconName) => (
             <div key={iconName} className="flex items-center m-2 p-2 border border-black rounded">
               <Icon icon={iconName} width="24" height="24" />
-              <span className="ml-2 text-sm text-gray-700">{iconName.split(':')[1]}</span>
-              <button
+              <span className="ml-2 text-sm text-gray-700">{iconName}</span>
+              <div
                 onClick={() => handleRemoveIcon(iconName)}
-                className="ml-2 text-red-500"
+                className="ml-2 text-red-500 hover:bg-red-500 hover:text-white"
               >
                 ✕
-              </button>
+              </div>
             </div>
           ))}
         </div>

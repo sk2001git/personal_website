@@ -1,4 +1,5 @@
 import { Project } from '@/types/project'
+import { Icon } from '@iconify/react/dist/iconify.js';
 import Image from 'next/image'
 
 interface CarouselCardProps {
@@ -30,6 +31,9 @@ const CarouselCard = ( {project} : CarouselCardProps) => {
       <p className="mt-3 text-gray-500">
         {project.summary}
       </p>
+
+
+
     </div>
     <div className="mt-auto flex border-t border-grey divide-x divide-grey">
       <a className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 " href={`/projects/${project._id}`}>

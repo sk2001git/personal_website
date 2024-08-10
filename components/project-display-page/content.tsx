@@ -92,8 +92,7 @@ const Content = ({project, users}: Props) => {
                   {project.Icons?.map((iconName) => (
                      <div key={iconName} className="flex flex-col items-center justify-center text-center">
                      <Icon icon={iconName} width="75%" height="auto" />
-                     
-                   </div>
+                    </div>
                 ))}
               </div>
              

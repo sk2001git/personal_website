@@ -6,6 +6,7 @@ import UserModel from "../models/UserProject"; // Import the User model from Mon
 import ProjectModel from "../models/ProjectSchema"; // Import the Project model from Mongoose
 import { Project } from "../../types/project";
 import { User as UserType } from "../../types/user";
+import { Icon } from '@iconify/react/dist/iconify.js';
 
 
 interface Props {
@@ -100,6 +101,7 @@ export async function getMasterProjects(): Promise<Project[]> {
         Image: projectFromDB.Image,
         ProjectCategory: projectFromDB.ProjectCategory,
         Team: teamMembers,
+        Icons: projectFromDB.Icons,
       };
     });
 
