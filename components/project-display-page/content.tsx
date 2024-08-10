@@ -2,6 +2,7 @@
 
 import React from "react";
 import TeamMemberCard from "./team-members-card";
+import { Icon } from "@iconify/react";
 
 interface PlainProject {
   _id: string;
@@ -25,7 +26,21 @@ type Props = {
   users: plainUsers[];
 };
 
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 const Content = ({project, users}: Props) => {
+  const iconNames: string[] = [
+    "devicon:pypi",
+    "devicon:react",
+    "devicon:docker",
+    "devicon:python",
+    "devicon:typescript",
+    "devicon:javascript",
+    "devicon:html5",
+  ];
+
   return (
     <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
       <div className="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">
@@ -65,9 +80,7 @@ const Content = ({project, users}: Props) => {
                 </a>
                 <p className="text-xs sm:text-sm text-gray-800 dark:text-gray-200"></p>
               </div>
-              <p className="text-lg text-gray-800 font-bold">
-                {project.summary}
-              </p>
+            
              
               <div className="text-center">
                 <figure className="relative w-full h-60">
@@ -81,7 +94,17 @@ const Content = ({project, users}: Props) => {
 
               <a className="text-lg text-gray-800 whitespace-pre-line"> {project.description} </a>
 
-              
+              <div className="grid grid-cols-5 sm:grid-cols-5 gap-1 p-1 rounded-lg bg-slate-100">
+                  {iconNames.map((iconName) => (
+                     <div key={iconName} className="flex flex-col items-center justify-center text-center">
+                     <Icon icon={iconName} width="75%" height="auto" />
+                     <a className="mt-2 font-sans font-bold text-gray-500 italic">
+                     {capitalizeFirstLetter(iconName.split(':')[1])}
+                     </a>
+                   </div>
+                ))}
+              </div>
+             
 
               
 

@@ -1,3 +1,4 @@
+import GrindTogether from '@/components/card';
 import Carousel from '@/components/CarouselComponents/Carousel'
 import { getMasterProjects } from '@/lib/actions/UserManagement'
 import Image from 'next/image'
