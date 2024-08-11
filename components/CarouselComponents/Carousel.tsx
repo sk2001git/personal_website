@@ -36,7 +36,7 @@ const Carousel = ({ masterProjects } : CarouselProps) => {
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
             {masterProjects?.map((project: Project) => (
-              <div className="embla__slide flex" key={project._id}>
+              <div className="embla__slide" key={project._id}>
                 <CarouselCard project={project} />
               </div>
             ))};  
