@@ -12,19 +12,17 @@ const Navbar = () => {
   return (
     <header className="w-full">
       <nav className="nav">
-          <div>
-            <a className="nav-words inline-flex gap-x-2 " href="/">
-              <Image 
+          <div className="flex justify-between gap-x-5">
+        
+            <a className="nav-words m-2 inline-flex" href="/">
+            <Image 
                 src="/assets/icons/home.svg"
                 width={24}
                 height={24}
                 alt="home"
               />
-              Home 
+              Home
             </a>
-          </div>
-          <div className="flex justify-between gap-x-5">
-            
             <a className="nav-words m-2" href={`/profile/${process.env.MAIN_ID}`}>
               Portfolio
             </a>

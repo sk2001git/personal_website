@@ -26,18 +26,16 @@ const ProfilePage = ({projects} : Props) => {
 
   return (
     <section className="columnOverlay">
-      <div className="inline-flex justify-between">
+      <div className="">
         <h2 className="section-text">
           Projects
         </h2>
-        <div className="inline-flex">
-          <a className="button-blue mx-4" href="/profile/create-proj">
-            Create  Project
-          </a>
-          <a className="button-blue mx-4" onClick={handleEditClick} >
-            {isEditing ? 'Stop Editing' : 'Edit Project'}
-          </a>
-        </div>
+        <a className="button-blue mx-2 justify-end" href="/profile/create-proj">
+          Create  Project
+        </a>
+        <a className="button-blue mx-2 my-2 justify-end" onClick={handleEditClick} >
+          {isEditing ? 'Stop Editing' : 'Edit Project'}
+        </a>
         
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6">
