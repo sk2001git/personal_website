@@ -10,6 +10,7 @@ import { Project } from "@/types/project";
 import UserSearch from "./UserSearch";
 import { User } from "@/types/user";
 import IconSearch from "../IconSearch";
+import { revalidatePath } from "next/cache";
 
 interface EditFormProps {
   project: string;
@@ -114,6 +115,7 @@ const EditForm: React.FC<EditFormProps> = ({project, members, allusers}: EditFor
     setIsSubmitting(false);
 
     router.push('/profile');
+    revalidatePath('/')
   };
 
   return (
