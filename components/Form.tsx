@@ -58,20 +58,27 @@ const Form: React.FC<FormProps> = ({ userId }) => {
     setIsSubmitting(true);
     if (!projectName) {
       alert ('Please enter a project name');
+      setIsSubmitting(false);
       return;
     }
     if (!parentSelectedImage || !parentSelectedFile) {
       alert ('Please upload an image');
+      setIsSubmitting(false);
+
       return;
     } 
     
     if (!category) {
       // Category not selected, show an error message or handle it accordingly
       alert('Please select a category');
+      setIsSubmitting(false);
+
       return;
     }
     if (!link || !documentation) {
       alert('Please enter a link and documentation link, if they are the same, please enter the same link');
+      setIsSubmitting(false);
+
       return;
     }
 

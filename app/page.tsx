@@ -1,4 +1,3 @@
-import GrindTogether from '@/components/card';
 import Carousel from '@/components/CarouselComponents/Carousel'
 import MainPageCard from '@/components/ProjectMainCard';
 import { getMasterProjects } from '@/lib/actions/UserManagement'
@@ -36,7 +35,10 @@ const Home = async () => {
             <Carousel masterProjects={projects}/>
           </section>
           <section className="w-full grid grid-cols-1 ">
-            {projects.map((project) => (
+            {projects
+            .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+            .map((project) => (
+            
               <MainPageCard key={project._id} project={project} />
             ))}
           </section>

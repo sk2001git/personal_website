@@ -102,6 +102,7 @@ export async function getMasterProjects(): Promise<Project[]> {
         ProjectCategory: projectFromDB.ProjectCategory,
         Team: teamMembers,
         Icons: projectFromDB.Icons,
+        updatedAt: projectFromDB.updatedAt,
       };
     });
 

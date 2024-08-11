@@ -13,4 +13,5 @@ export interface Project {
   ProjectCategory?: string;
   Team: string[];
   Icons: string[];
+  updatedAt: Date;
 }
