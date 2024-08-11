@@ -12,7 +12,7 @@ const MainPageCard = ( {project} : CardProps) => {
   return (
     <div className="group flex flex-col my-4 bg-white border-2 border-grey shadow-sm rounded-xl max-2xl">
       <div className="flex flex-row">
-        <div className="flex items-center justify-center h-64 w-1/3 bg-white rounded-t-xl  mx-3 overflow-hidden">
+        <div className="flex items-center justify-center w-1/3 bg-white rounded-t-xl  mx-3 overflow-hidden">
           <Image 
             src={project.Image}
             alt={`Project Image - ${project.title}`}
@@ -42,21 +42,21 @@ const MainPageCard = ( {project} : CardProps) => {
                   ))}
           </div>
           <div className="flex flex-row">
-            <div className="flex flex-row my-2 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-700 items-center w-full md:w-1/4 sm:w-1/2 mx-2 ">
+            <div className="flex flex-row my-2 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-700 items-center w-full md:w-1/3 sm:w-1/2 mx-2 text-wrap ">
               <Link
                 href={project.link || ""}
                 className="flex items-center"
               >
-                <span className="truncate">Visit Website</span>
+                <span className="text-wrap">Visit Website</span>
               </Link>
               
             </div>
-            <div className="flex flex-row my-2 bg-green-400 text-white px-4 py-2 rounded hover:bg-green-600 items-center w-full md:w-1/4 sm:w-1/2 mx-2">
+            <div className="flex flex-row my-2 bg-green-400 text-white px-4 py-2 rounded hover:bg-green-600 items-center w-full md:w-1/3 sm:w-1/2 mx-2">
               <Link
                 href={project.documentation || ""}
                 className="flex items-center"
               >
-                <span className="truncate">Documentation</span>
+                <span className="text-wrap">Documentation</span>
               </Link>
               
             </div>

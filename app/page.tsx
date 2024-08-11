@@ -34,12 +34,13 @@ const Home = async () => {
           <section className="w-full px-6 md:px-20  flex">
             <Carousel masterProjects={projects}/>
           </section>
-          <section className="w-full grid grid-cols-1 ">
+          <section className="w-full grid grid-cols-1">
             {projects
             .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
             .map((project) => (
-            
-              <MainPageCard key={project._id} project={project} />
+              <div className="grid grid-cols-1" key={project._id}>
+                <MainPageCard project={project} />
+            </div>
             ))}
           </section>
       </section>

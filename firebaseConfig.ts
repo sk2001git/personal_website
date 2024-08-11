@@ -4,7 +4,7 @@ import { getStorage } from 'firebase/storage';
 
 
 const firebaseConfig = firebase.initializeApp({
-  apiKey: "AIzaSyAgldRThhRBQjQ83_ckxogwCbC2N-xscGQ",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "personalwebsite-411306.firebaseapp.com",
   projectId: "personalwebsite-411306",
   storageBucket: "personalwebsite-411306.appspot.com",
