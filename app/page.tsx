@@ -31,7 +31,7 @@ const Home = async () => {
           </div>
         </section>
         <section className="w-full grid grid-cols-1 ">
-          <section className="w-full px-6 md:px-20  flex">
+          <section className="w-full px-6 md:px-20 flex justify-center">
             <Carousel masterProjects={projects}/>
           </section>
           <section className="w-full grid grid-cols-1">
