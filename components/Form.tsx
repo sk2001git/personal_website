@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/firebaseConfig';
 import IconSearch from "@/components/IconSearch";
+import { revalidatePath } from "next/cache";
 
 
 
@@ -103,6 +104,7 @@ const Form: React.FC<FormProps> = ({ userId }) => {
     } 
     await createProject({project, userId});
     router.push('/profile');
+    revalidatePath('/');
   };
   
   return (
